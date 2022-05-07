@@ -4,10 +4,10 @@ from sys import argv
 from time import sleep
 from random import randint
 session = requests.Session()
-print("**********  特别鸣谢 Avenshy & SSmJaE  **********")
-print("                 Version:0.5dev\n")
-print("**********        此版本更新于Hhy       **********")
-print("***************************************************\n")
+# print("**********  特别鸣谢 Avenshy & SSmJaE  **********")
+# print("                 Version:0.5dev\n")
+# print("**********        此版本更新于Hhy       **********")
+# print("***************************************************\n")
 
 def printline():
     print('-'*51)
@@ -22,20 +22,24 @@ except:
         username = input('请输入账号: ')
         password = input('请输入密码: ')
         # 登录模块
-        print('登录中...')
-        loginUrl = "https://sso.sflep.com/cas/login?service=http%3a%2f%2fwelearn.sflep.com%2fuser%2floginredirect.aspx"
-        response = session.get(loginUrl)
-        lt = re.search('name="lt" value="(.*?)"', response.text).group(1)
-        response = session.post(loginUrl, data={"username": username,
-                                                "password": password,
-                                                "lt": lt,
-                                                "_eventId": "submit",
-                                                "submit": "LOGIN"})
-        if "请登录" in response.text:
+        response = requests.get(
+            'https://welearn.sflep.com/user/prelogin.aspx?loginret=http%3a%2f%2fwelearn.sflep.com%2fuser%2floginredirect.aspx', allow_redirects=False)
+        rturl = response.headers['Location'].replace(
+            'https://sso.sflep.com/idsvr', '')
+        data = {
+            'rturl': rturl,
+            'account': username,
+            'pwd': password,
+        }
+        res = session.post(
+            "https://sso.sflep.com/idsvr/account/login", data=data)
+        url = 'https://sso.sflep.com/idsvr'+rturl
+        res = session.get(url)
+        if "我的主页" in res.text:
+            print("登录成功!!")
+        else:
             input("登录失败!!")
             exit(0)
-        else:
-            print("登录成功!!")
     elif loginmode=='2':
         try:
             cookie = dict(map(lambda x:x.split('=',1),input('请粘贴Cookie: ').split(";")))
