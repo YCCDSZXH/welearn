@@ -1,5 +1,6 @@
 import requests
 import re
+import sys
 from sys import argv
 from time import sleep
 from random import randint
