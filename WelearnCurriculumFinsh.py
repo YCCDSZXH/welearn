@@ -39,7 +39,8 @@ except:
             "https://sso.sflep.com/idsvr/account/login", data=data)
         url = 'https://sso.sflep.com/idsvr'+rturl
         res = session.get(url)
-        if "我的主页" in res.text:
+        print(res.text)
+        if "localStorage.setItem('authToken'" in res.text:
             print("登录成功!!")
         else:
             input("登录失败!!")
