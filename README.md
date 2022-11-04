@@ -1,7 +1,12 @@
 ## **WelearnCurriculumFinsh**
+1. 运行welearn.py
+2. 输入账号密码或者使用cookies登录
+3. 开始刷课
 
 
 
+
+```
 ## 特别鸣谢Avenshy和SSmJaE大佬提供的v0.1-4版本
   
 
@@ -33,3 +38,4 @@
 
 ### `v0.1dev`
 * 敲出首个版本的代码
+```
