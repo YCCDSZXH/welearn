@@ -3,7 +3,10 @@
 2. 输入账号密码或者使用cookies登录
 3. 开始刷课
 
-
+```shell
+pip install requests -i -i https://pypi.tuna.tsinghua.edu.cn/simple
+python3 welearn.py
+```
 
 
 ```
